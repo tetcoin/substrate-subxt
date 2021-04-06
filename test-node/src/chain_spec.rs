@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-use sc_service::ChainType;
+use tc_service::ChainType;
 use tp_consensus_aura::sr25519::AuthorityId as AuraId;
 use tet_core::{
     sr25519,
@@ -42,7 +42,7 @@ use test_node_runtime::{
 // const STAGING_TELEMETRY_URL: &str = "wss://telemetry.polkadot.io/submit/";
 
 /// Specialized `ChainSpec`. This is a specialization of the general Tetcore ChainSpec type.
-pub type ChainSpec = sc_service::GenericChainSpec<GenesisConfig>;
+pub type ChainSpec = tc_service::GenericChainSpec<GenesisConfig>;
 
 /// Generate a crypto pair from seed.
 pub fn get_from_seed<TPublic: Public>(seed: &str) -> <TPublic::Pair as Pair>::Public {

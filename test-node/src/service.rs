@@ -27,7 +27,7 @@ use sc_finality_grandpa::{
     FinalityProofProvider as GrandpaFinalityProofProvider,
     SharedVoterState,
 };
-use sc_service::{
+use tc_service::{
     error::Error as ServiceError,
     Configuration,
     PartialComponents,
@@ -53,14 +53,14 @@ native_executor_instance!(
     test_node_runtime::native_version,
 );
 
-type FullClient = sc_service::TFullClient<Block, RuntimeApi, Executor>;
-type FullBackend = sc_service::TFullBackend<Block>;
+type FullClient = tc_service::TFullClient<Block, RuntimeApi, Executor>;
+type FullBackend = tc_service::TFullBackend<Block>;
 type FullSelectChain = sc_consensus::LongestChain<FullBackend, Block>;
 
 pub fn new_partial(
     config: &Configuration,
 ) -> Result<
-    sc_service::PartialComponents<
+    tc_service::PartialComponents<
         FullClient,
         FullBackend,
         FullSelectChain,
@@ -81,7 +81,7 @@ pub fn new_partial(
     let inherent_data_providers = tp_inherents::InherentDataProviders::new();
 
     let (client, backend, keystore, task_manager) =
-        sc_service::new_full_parts::<Block, RuntimeApi, Executor>(&config)?;
+        tc_service::new_full_parts::<Block, RuntimeApi, Executor>(&config)?;
     let client = Arc::new(client);
 
     let select_chain = sc_consensus::LongestChain::new(backend.clone());
@@ -116,7 +116,7 @@ pub fn new_partial(
         tp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone()),
     )?;
 
-    Ok(sc_service::PartialComponents {
+    Ok(tc_service::PartialComponents {
         client,
         backend,
         task_manager,
@@ -149,7 +149,7 @@ pub fn new_full(
         GrandpaFinalityProofProvider::new_for_service(backend.clone(), client.clone());
 
     let (network, network_status_sinks, system_rpc_tx, network_starter) =
-        sc_service::build_network(sc_service::BuildNetworkParams {
+        tc_service::build_network(tc_service::BuildNetworkParams {
             config: &config,
             client: client.clone(),
             transaction_pool: transaction_pool.clone(),
@@ -162,7 +162,7 @@ pub fn new_full(
         })?;
 
     if config.offchain_worker.enabled {
-        sc_service::build_offchain_workers(
+        tc_service::build_offchain_workers(
             &config,
             backend.clone(),
             task_manager.spawn_handle(),
@@ -176,9 +176,9 @@ pub fn new_full(
     let name = config.network.node_name.clone();
     let enable_grandpa = !config.disable_grandpa;
     let prometheus_registry = config.prometheus_registry().cloned();
-    let telemetry_connection_sinks = sc_service::TelemetryConnectionSinks::default();
+    let telemetry_connection_sinks = tc_service::TelemetryConnectionSinks::default();
 
-    let rpc_handlers = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
+    let rpc_handlers = tc_service::spawn_tasks(tc_service::SpawnTasksParams {
         network: network.clone(),
         client: client.clone(),
         keystore: keystore.clone(),
@@ -282,7 +282,7 @@ pub fn new_light(
     config: Configuration,
 ) -> Result<(TaskManager, RpcHandlers), ServiceError> {
     let (client, backend, keystore, mut task_manager, on_demand) =
-        sc_service::new_light_parts::<Block, RuntimeApi, Executor>(&config)?;
+        tc_service::new_light_parts::<Block, RuntimeApi, Executor>(&config)?;
 
     let transaction_pool = Arc::new(sc_transaction_pool::BasicPool::new_light(
         config.transaction_pool.clone(),
@@ -318,7 +318,7 @@ pub fn new_light(
         GrandpaFinalityProofProvider::new_for_service(backend.clone(), client.clone());
 
     let (network, network_status_sinks, system_rpc_tx, network_starter) =
-        sc_service::build_network(sc_service::BuildNetworkParams {
+        tc_service::build_network(tc_service::BuildNetworkParams {
             config: &config,
             client: client.clone(),
             transaction_pool: transaction_pool.clone(),
@@ -331,7 +331,7 @@ pub fn new_light(
         })?;
 
     if config.offchain_worker.enabled {
-        sc_service::build_offchain_workers(
+        tc_service::build_offchain_workers(
             &config,
             backend.clone(),
             task_manager.spawn_handle(),
@@ -340,13 +340,13 @@ pub fn new_light(
         );
     }
 
-    let rpc_handlers = sc_service::spawn_tasks(sc_service::SpawnTasksParams {
+    let rpc_handlers = tc_service::spawn_tasks(tc_service::SpawnTasksParams {
         remote_blockchain: Some(backend.remote_blockchain()),
         transaction_pool,
         task_manager: &mut task_manager,
         on_demand: Some(on_demand),
         rpc_extensions_builder: Box::new(|_, _| ()),
-        telemetry_connection_sinks: sc_service::TelemetryConnectionSinks::default(),
+        telemetry_connection_sinks: tc_service::TelemetryConnectionSinks::default(),
         config,
         client,
         keystore,

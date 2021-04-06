@@ -41,15 +41,15 @@ use jsonrpsee::{
     },
     transport::TransportClient,
 };
-use sc_network::config::TransportConfig;
-pub use sc_service::{
+use tc_network::config::TransportConfig;
+pub use tc_service::{
     config::{
         DatabaseConfig,
         KeystoreConfig,
     },
     Error as ServiceError,
 };
-use sc_service::{
+use tc_service::{
     config::{
         NetworkConfiguration,
         TaskType,
@@ -60,6 +60,7 @@ use sc_service::{
     RpcHandlers,
     RpcSession,
     TaskManager,
+    KeepBlocks,
 };
 use std::{
     future::Future,
@@ -173,7 +174,7 @@ pub enum Role {
     Authority(tp_keyring::AccountKeyring),
 }
 
-impl From<Role> for sc_service::Role {
+impl From<Role> for tc_service::Role {
     fn from(role: Role) -> Self {
         match role {
             Role::Light => Self::Light,
@@ -232,7 +233,7 @@ impl<C: ChainSpec + 'static> SubxtClientConfig<C> {
             enable_mdns: true,
             allow_private_ipv4: true,
             wasm_external_transport: None,
-            use_yamux_flow_control: true,
+            // use_remux_flow_control: true,
         };
         let telemetry_endpoints = if let Some(port) = self.telemetry {
             let endpoints = TelemetryEndpoints::new(vec![(
@@ -265,13 +266,17 @@ impl<C: ChainSpec + 'static> SubxtClientConfig<C> {
             telemetry_endpoints,
 
             telemetry_external_transport: Default::default(),
+            telemetry_handle: Default::default(),
+            telemetry_span: Default::default(),
             default_heap_pages: Default::default(),
             disable_grandpa: Default::default(),
+            disable_log_reloading: Default::default(),
             execution_strategies: Default::default(),
             force_authoring: Default::default(),
+            keep_blocks: KeepBlocks::All,
+            keystore_remote: Default::default(),
             offchain_worker: Default::default(),
             prometheus_config: Default::default(),
-            pruning: Default::default(),
             rpc_cors: Default::default(),
             rpc_http: Default::default(),
             rpc_ipc: Default::default(),
@@ -286,6 +291,9 @@ impl<C: ChainSpec + 'static> SubxtClientConfig<C> {
             wasm_method: Default::default(),
             base_path: Default::default(),
             informant_output_format: Default::default(),
+            state_pruning: Default::default(),
+            transaction_storage: tc_client_db::TransactionStorageMode::BlockBody,
+            wasm_runtime_overrides: Default::default(),
         };
 
         log::info!("{}", service_config.impl_name);
