@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use codec::{
     Decode,
@@ -39,14 +39,14 @@ use crate::{
 /// Extra type.
 pub type Extra<T> = <<T as Runtime>::Extra as SignedExtra<T>>::Extra;
 
-/// SignedExtra checks copied from substrate, in order to remove requirement to implement
-/// substrate's `frame_system::Trait`
+/// SignedExtra checks copied from tetcore, in order to remove requirement to implement
+/// tetcore's `frame_system::Trait`
 
 /// Ensure the runtime version registered in the transaction is the same as at present.
 ///
 /// # Note
 ///
-/// This is modified from the substrate version to allow passing in of the version, which is
+/// This is modified from the tetcore version to allow passing in of the version, which is
 /// returned via `additional_signed()`.
 
 /// Ensure the runtime version registered in the transaction is the same as at present.
@@ -78,7 +78,7 @@ where
 ///
 /// # Note
 ///
-/// This is modified from the substrate version to allow passing in of the version, which is
+/// This is modified from the tetcore version to allow passing in of the version, which is
 /// returned via `additional_signed()`.
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
 pub struct CheckTxVersion<T: System>(
@@ -108,7 +108,7 @@ where
 ///
 /// # Note
 ///
-/// This is modified from the substrate version to allow passing in of the genesis hash, which is
+/// This is modified from the tetcore version to allow passing in of the genesis hash, which is
 /// returned via `additional_signed()`.
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
 pub struct CheckGenesis<T: System>(
@@ -138,7 +138,7 @@ where
 ///
 /// # Note
 ///
-/// This is modified from the substrate version to allow passing in of the genesis hash, which is
+/// This is modified from the tetcore version to allow passing in of the genesis hash, which is
 /// returned via `additional_signed()`. It assumes therefore `Era::Immortal` (The transaction is
 /// valid forever)
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
@@ -244,7 +244,7 @@ pub trait SignedExtra<T: System>: SignedExtension {
     fn extra(&self) -> Self::Extra;
 }
 
-/// Default `SignedExtra` for substrate runtimes.
+/// Default `SignedExtra` for tetcore runtimes.
 #[derive(Encode, Decode, Clone, Eq, PartialEq, Debug)]
 pub struct DefaultExtra<T: System> {
     spec_version: u32,

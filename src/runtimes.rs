@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use codec::Encode;
 use sp_runtime::{
@@ -36,8 +36,8 @@ pub struct Babe;
 ///
 /// # Note
 ///
-/// These are redefined here to avoid dependencies on the substrate creates where they are defined.
-/// They must be identical to the definitions in the target substrate version.
+/// These are redefined here to avoid dependencies on the tetcore creates where they are defined.
+/// They must be identical to the definitions in the target tetcore version.
 pub mod app {
     use application_crypto::{
         app_crypto,
@@ -107,7 +107,7 @@ impl sp_runtime::BoundToRuntimeAppPublic for AuthorityDiscovery {
 }
 
 impl_opaque_keys! {
-    /// Substrate base runtime keys
+    /// Tetcore base runtime keys
     pub struct BasicSessionKeys {
         /// GRANDPA session key
         pub grandpa: Grandpa,
@@ -164,11 +164,11 @@ pub trait Runtime: System + Sized + Send + Sync + 'static {
     type Extra: SignedExtra<Self> + Send + Sync + 'static;
 }
 
-/// Concrete type definitions compatible with those in the default substrate `node_runtime`
+/// Concrete type definitions compatible with those in the default tetcore `node_runtime`
 ///
 /// # Note
 ///
-/// If the concrete types in the target substrate runtime differ from these, a custom Runtime
+/// If the concrete types in the target tetcore runtime differ from these, a custom Runtime
 /// definition MUST be used to ensure type compatibility.
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct DefaultNodeRuntime;
@@ -186,7 +186,7 @@ impl System for DefaultNodeRuntime {
     type Hash = sp_core::H256;
     type Hashing = BlakeTwo256;
     type AccountId = <<MultiSignature as Verify>::Signer as IdentifyAccount>::AccountId;
-    type Address = pallet_indices::address::Address<Self::AccountId, u32>;
+    type Address = noble_indices::address::Address<Self::AccountId, u32>;
     type Header = Header<Self::BlockNumber, BlakeTwo256>;
     type Extrinsic = OpaqueExtrinsic;
     type AccountData = AccountData<<Self as Balances>::Balance>;
@@ -243,10 +243,10 @@ impl Session for NodeTemplateRuntime {
 impl Sudo for NodeTemplateRuntime {}
 
 /// Concrete type definitions compatible with the node template, with the
-/// contracts pallet enabled.
+/// contracts noble enabled.
 ///
 /// Inherits types from [`NodeTemplateRuntime`], but adds an implementation for
-/// the contracts pallet trait.
+/// the contracts noble trait.
 #[derive(Debug, Clone, Eq, PartialEq)]
 pub struct ContractsTemplateRuntime;
 

@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::utils;
 use proc_macro2::TokenStream;
@@ -173,7 +173,7 @@ impl From<ItemTest> for Test {
                 }
             }
         }
-        let subxt = utils::use_crate("substrate-subxt");
+        let subxt = utils::use_crate("tetcore-subxt");
         let runtime = runtime
             .unwrap_or_else(|| syn::parse2(quote!(#subxt::DefaultNodeRuntime)).unwrap());
         Self {
@@ -189,7 +189,7 @@ impl From<ItemTest> for Test {
 
 impl Test {
     fn into_tokens(self) -> TokenStream {
-        let subxt = utils::use_crate("substrate-subxt");
+        let subxt = utils::use_crate("tetcore-subxt");
         let sp_keyring = utils::use_crate("sp-keyring");
         let env_logger = utils::opt_crate("env_logger")
             .map(|env_logger| quote!(#env_logger::try_init().ok();));
@@ -428,8 +428,8 @@ mod tests {
             #[ignore]
             async fn test_transfer_balance() {
                 env_logger::try_init().ok();
-                let client = substrate_subxt::ClientBuilder::<KusamaRuntime>::new().build().await.unwrap();
-                let signer = substrate_subxt::PairSigner::new(sp_keyring::AccountKeyring::Alice.pair());
+                let client = tetcore_subxt::ClientBuilder::<KusamaRuntime>::new().build().await.unwrap();
+                let signer = tetcore_subxt::PairSigner::new(sp_keyring::AccountKeyring::Alice.pair());
                 #[allow(unused)]
                 let alice = sp_keyring::AccountKeyring::Alice.to_account_id();
                 #[allow(unused)]

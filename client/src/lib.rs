@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,9 +12,9 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-//! Client for embedding substrate nodes.
+//! Client for embedding tetcore nodes.
 
 #![deny(missing_docs)]
 
@@ -78,7 +78,7 @@ pub enum SubxtClientError {
     Mpsc(#[from] mpsc::SendError),
 }
 
-/// Client for an embedded substrate node.
+/// Client for an embedded tetcore node.
 pub struct SubxtClient {
     to_back: mpsc::Sender<String>,
     from_back: Compat01As03<mpsc01::Receiver<String>>,
@@ -307,7 +307,7 @@ mod tests {
     use super::*;
     use async_std::path::Path;
     use sp_keyring::AccountKeyring;
-    use substrate_subxt::{
+    use tetcore_subxt::{
         balances::TransferCallExt,
         ClientBuilder,
         KusamaRuntime as NodeTemplateRuntime,
@@ -343,7 +343,7 @@ mod tests {
         let tmp = TempDir::new("subxt-").expect("failed to create tempdir");
         let config = SubxtClientConfig {
             // base_path:
-            impl_name: "substrate-subxt-light-client",
+            impl_name: "tetcore-subxt-light-client",
             impl_version: "0.0.1",
             author: "David Craven",
             copyright_start_year: 2020,
@@ -376,7 +376,7 @@ mod tests {
         env_logger::try_init().ok();
         let tmp = TempDir::new("subxt-").expect("failed to create tempdir");
         let config = SubxtClientConfig {
-            impl_name: "substrate-subxt-full-client",
+            impl_name: "tetcore-subxt-full-client",
             impl_version: "0.0.1",
             author: "David Craven",
             copyright_start_year: 2020,

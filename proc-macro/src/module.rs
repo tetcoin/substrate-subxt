@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::utils;
 use heck::SnakeCase;
@@ -79,7 +79,7 @@ type EventAliasAttr = utils::UniAttr<utils::Attr<syn::Ident, syn::Type>>;
 ///
 /// ```ignore
 /// #[module]
-/// trait Pallet: System {
+/// trait Noble: System {
 ///     #![event_type(SomeType)]
 ///     #![event_alias(TypeNameAlias = SomeType)]
 ///     #![event_alias(SomeOtherAlias = TypeWithAssociatedTypes<T>)]
@@ -125,7 +125,7 @@ pub fn module(_args: TokenStream, tokens: TokenStream) -> TokenStream {
         .partition(|attr| parse_event_type_attr(attr).is_none());
     input.attrs = other_attrs;
 
-    let subxt = utils::use_crate("substrate-subxt");
+    let subxt = utils::use_crate("tetcore-subxt");
     let module = &input.ident;
     let module_name = module.to_string();
     let module_events_decoder = events_decoder_trait_name(module);
@@ -228,7 +228,7 @@ mod tests {
             }
 
             impl<T: Balances> BalancesEventsDecoder for
-                substrate_subxt::EventsDecoder<T>
+                tetcore_subxt::EventsDecoder<T>
             {
                 fn with_balances(&mut self) {
                     self.with_system();
@@ -269,7 +269,7 @@ mod tests {
             }
 
             impl<T: Herd> HerdEventsDecoder for
-                substrate_subxt::EventsDecoder<T>
+                tetcore_subxt::EventsDecoder<T>
             {
                 fn with_herd(&mut self) {
                     self.with_husbandry();

@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::utils;
 use heck::{
@@ -27,8 +27,8 @@ use quote::{
 use synstructure::Structure;
 
 pub fn event(s: Structure) -> TokenStream {
-    let subxt = utils::use_crate("substrate-subxt");
-    let codec = utils::use_crate("parity-scale-codec");
+    let subxt = utils::use_crate("tetcore-subxt");
+    let codec = utils::use_crate("tetsy-scale-codec");
     let ident = &s.ast().ident;
     let generics = &s.ast().generics;
     let module = utils::module_name(generics);
@@ -71,7 +71,7 @@ mod tests {
             }
         };
         let expected = quote! {
-            impl<T: Balances> substrate_subxt::Event<T> for TransferEvent<T> {
+            impl<T: Balances> tetcore_subxt::Event<T> for TransferEvent<T> {
                 const MODULE: &'static str = MODULE;
                 const EVENT: &'static str = "Transfer";
             }
@@ -82,7 +82,7 @@ mod tests {
                 fn transfer(&self) -> Result<Option<TransferEvent<T>>, codec::Error>;
             }
 
-            impl<T: Balances> TransferEventExt<T> for substrate_subxt::ExtrinsicSuccess<T> {
+            impl<T: Balances> TransferEventExt<T> for tetcore_subxt::ExtrinsicSuccess<T> {
                 fn transfer(&self) -> Result<Option<TransferEvent<T>>, codec::Error> {
                     self.find_event()
                 }

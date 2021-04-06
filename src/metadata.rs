@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use std::{
     collections::HashMap,
@@ -44,7 +44,7 @@ use crate::Encoded;
 #[derive(Debug, thiserror::Error)]
 pub enum MetadataError {
     /// Failed to parse metadata.
-    #[error("Error converting substrate metadata: {0}")]
+    #[error("Error converting tetcore metadata: {0}")]
     Conversion(#[from] ConversionError),
     /// Module is not in metadata.
     #[error("Module {0} not found")]
@@ -282,7 +282,7 @@ impl StorageMetadata {
             StorageHasher::Identity => bytes.to_vec(),
             StorageHasher::Blake2_128 => sp_core::blake2_128(bytes).to_vec(),
             StorageHasher::Blake2_128Concat => {
-                // copied from substrate Blake2_128Concat::hash since StorageHasher is not public
+                // copied from tetcore Blake2_128Concat::hash since StorageHasher is not public
                 sp_core::blake2_128(bytes)
                     .iter()
                     .chain(bytes)
@@ -406,8 +406,8 @@ impl ModuleEventMetadata {
     }
 }
 
-/// Naive representation of event argument types, supports current set of substrate EventArg types.
-/// If and when Substrate uses `type-metadata`, this can be replaced.
+/// Naive representation of event argument types, supports current set of tetcore EventArg types.
+/// If and when Tetcore uses `type-metadata`, this can be replaced.
 ///
 /// Used to calculate the size of a instance of an event variant without having the concrete type,
 /// so the raw bytes can be extracted from the encoded `Vec<EventRecord<E>>` (without `E` defined).

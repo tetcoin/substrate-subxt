@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 extern crate proc_macro;
 
@@ -33,8 +33,8 @@ use synstructure::{
 /// Register type sizes for [EventsDecoder](struct.EventsDecoder.html) and set the `MODULE`.
 ///
 /// The `module` macro registers the type sizes of the associated types of a trait so that [EventsDecoder](struct.EventsDecoder.html)
-/// can decode events of that type when received from Substrate. It also sets the `MODULE` constant
-/// to the name of the trait (must match the name of the Substrate pallet) that enables the [Call](), [Event]() and [Store]() macros to work.
+/// can decode events of that type when received from Tetcore. It also sets the `MODULE` constant
+/// to the name of the trait (must match the name of the Tetcore noble) that enables the [Call](), [Event]() and [Store]() macros to work.
 ///
 /// If you do not want an associated type to be registered, likely because you never expect it as part of a response payload to be decoded, use `#[module(ignore)]` on the type.
 ///
@@ -69,7 +69,7 @@ use synstructure::{
 /// }
 ///
 /// impl<T: Herd> HerdEventsDecoder for
-///     substrate_subxt::EventsDecoder<T>
+///     tetcore_subxt::EventsDecoder<T>
 /// {
 ///     fn with_herd(&mut self) {
 ///         self.with_husbandry();
@@ -90,11 +90,11 @@ pub fn module(args: TokenStream, input: TokenStream) -> TokenStream {
 
 decl_derive!(
     [Call] =>
-    /// Derive macro that implements [substrate_subxt::Call](../substrate_subxt/trait.Call.html) for your struct
+    /// Derive macro that implements [tetcore_subxt::Call](../tetcore_subxt/trait.Call.html) for your struct
     /// and defines&implements the calls as an extension trait.
     ///
-    /// Use the `Call` derive macro in tandem with the [#module](../substrate_subxt/attr.module.html) macro to extend
-    /// your struct to enable calls to substrate and to decode events. The struct maps to the corresponding Substrate runtime call, e.g.:
+    /// Use the `Call` derive macro in tandem with the [#module](../tetcore_subxt/attr.module.html) macro to extend
+    /// your struct to enable calls to tetcore and to decode events. The struct maps to the corresponding Tetcore runtime call, e.g.:
     ///
     /// ```ignore
     /// decl_module! {
@@ -104,7 +104,7 @@ decl_derive!(
     /// }
     ///```
     ///
-    /// Implements [substrate_subxt::Call](../substrate_subxt/trait.Call.html) and adds an extension trait that
+    /// Implements [tetcore_subxt::Call](../tetcore_subxt/trait.Call.html) and adds an extension trait that
     /// provides two methods named as your struct.
     ///
     /// Example:
@@ -126,13 +126,13 @@ decl_derive!(
     /// }
     /// ```
     ///
-    /// When building a [Client](../substrate_subxt/struct.Client.html) parameterised to `MyRuntime`, you have access to
+    /// When building a [Client](../tetcore_subxt/struct.Client.html) parameterised to `MyRuntime`, you have access to
     /// two new methods: `fun_stuff()` and `fun_stuff_and_watch()` by way of the derived `FunStuffExt`
     /// trait. The `_and_watch` variant makes the call and waits for the result. The fields of the
     /// input struct become arguments to the calls (ignoring the marker field).
     ///
-    /// Under the hood the implementation calls [submit()](../substrate_subxt/struct.Client.html#method.submit) and
-    /// [watch()](../substrate_subxt/struct.Client.html#method.watch) respectively.
+    /// Under the hood the implementation calls [submit()](../tetcore_subxt/struct.Client.html#method.submit) and
+    /// [watch()](../tetcore_subxt/struct.Client.html#method.watch) respectively.
     ///
     /// *N.B.* You must use the `#[derive(Call)]` macro with `#[module]` in the same module or you will get errors
     /// about undefined method with a name starting with `with_`.

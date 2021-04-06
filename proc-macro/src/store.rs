@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::utils;
 use heck::{
@@ -66,7 +66,7 @@ fn parse_returns_attr(attr: &syn::Attribute) -> Option<(syn::Type, syn::Type, bo
 }
 
 pub fn store(s: Structure) -> TokenStream {
-    let subxt = utils::use_crate("substrate-subxt");
+    let subxt = utils::use_crate("tetcore-subxt");
     let ident = &s.ast().ident;
     let generics = &s.ast().generics;
     let params = utils::type_params(generics);
@@ -190,14 +190,14 @@ mod tests {
             }
         };
         let expected = quote! {
-            impl<'a, T: Balances> substrate_subxt::Store<T> for AccountStore<'a, T> {
+            impl<'a, T: Balances> tetcore_subxt::Store<T> for AccountStore<'a, T> {
                 const MODULE: &'static str = MODULE;
                 const FIELD: &'static str = "Account";
                 type Returns = AccountData<T::Balance>;
 
                 fn prefix(
-                    metadata: &substrate_subxt::Metadata,
-                ) -> Result<substrate_subxt::sp_core::storage::StorageKey, substrate_subxt::MetadataError> {
+                    metadata: &tetcore_subxt::Metadata,
+                ) -> Result<tetcore_subxt::sp_core::storage::StorageKey, tetcore_subxt::MetadataError> {
                     Ok(metadata
                         .module(Self::MODULE)?
                         .storage(Self::FIELD)?
@@ -206,8 +206,8 @@ mod tests {
 
                 fn key(
                     &self,
-                    metadata: &substrate_subxt::Metadata,
-                ) -> Result<substrate_subxt::sp_core::storage::StorageKey, substrate_subxt::MetadataError> {
+                    metadata: &tetcore_subxt::Metadata,
+                ) -> Result<tetcore_subxt::sp_core::storage::StorageKey, tetcore_subxt::MetadataError> {
                     Ok(metadata
                         .module(Self::MODULE)?
                         .storage(Self::FIELD)?
@@ -217,26 +217,26 @@ mod tests {
             }
 
             /// Store extension trait.
-            pub trait AccountStoreExt<T: substrate_subxt::Runtime + Balances> {
+            pub trait AccountStoreExt<T: tetcore_subxt::Runtime + Balances> {
                 /// Retrieve the store element.
                 fn account<'a>(
                     &'a self,
                     account_id: &'a <T as System>::AccountId,
                     hash: Option<T::Hash>,
-                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<AccountData<T::Balance>, substrate_subxt::Error>> + Send + 'a>>;
+                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<AccountData<T::Balance>, tetcore_subxt::Error>> + Send + 'a>>;
                 /// Iterate over the store element.
                 fn account_iter<'a>(
                     &'a self,
                     hash: Option<T::Hash>,
-                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<substrate_subxt::KeyIter<T, AccountStore<'a, T>>, substrate_subxt::Error>> + Send + 'a>>;
+                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<tetcore_subxt::KeyIter<T, AccountStore<'a, T>>, tetcore_subxt::Error>> + Send + 'a>>;
             }
 
-            impl<T: substrate_subxt::Runtime + Balances> AccountStoreExt<T> for substrate_subxt::Client<T> {
+            impl<T: tetcore_subxt::Runtime + Balances> AccountStoreExt<T> for tetcore_subxt::Client<T> {
                 fn account<'a>(
                     &'a self,
                     account_id: &'a <T as System>::AccountId,
                     hash: Option<T::Hash>,
-                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<AccountData<T::Balance>, substrate_subxt::Error>> + Send + 'a>>
+                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<AccountData<T::Balance>, tetcore_subxt::Error>> + Send + 'a>>
                 {
                     let _ = core::marker::PhantomData::<T>;
                     Box::pin(async move { self.fetch_or_default(&AccountStore { account_id, }, hash).await })
@@ -245,7 +245,7 @@ mod tests {
                 fn account_iter<'a>(
                     &'a self,
                     hash: Option<T::Hash>,
-                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<substrate_subxt::KeyIter<T, AccountStore<'a, T>>, substrate_subxt::Error>> + Send + 'a>> {
+                ) -> core::pin::Pin<Box<dyn core::future::Future<Output = Result<tetcore_subxt::KeyIter<T, AccountStore<'a, T>>, tetcore_subxt::Error>> + Send + 'a>> {
                     Box::pin(self.iter(hash))
                 }
             }

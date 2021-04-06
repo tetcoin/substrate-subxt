@@ -8,7 +8,7 @@ See [examples](./examples).
 
 **Alternatives**
 
-[substrate-api-client](https://github.com/scs/substrate-api-client) provides similar functionality.
+[tetcore-api-client](https://github.com/scs/tetcore-api-client) provides similar functionality.
 
 ## Tetcore Subxt Client
 By default the client builder will connect to a full node via rpc. The `subxt-client` helps

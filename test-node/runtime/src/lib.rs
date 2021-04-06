@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,9 +12,9 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-//! The Substrate Node Template runtime. This can be compiled with `#[no_std]`, ready for Wasm.
+//! The Tetcore Node Template runtime. This can be compiled with `#[no_std]`, ready for Wasm.
 
 #![cfg_attr(not(feature = "std"), no_std)]
 // `construct_runtime!` does a lot of recursion and requires us to increase the limit to 256.
@@ -25,7 +25,7 @@
 #[cfg(feature = "std")]
 include!(concat!(env!("OUT_DIR"), "/wasm_binary.rs"));
 
-use pallet_grandpa::{
+use noble_grandpa::{
     fg_primitives,
     AuthorityId as GrandpaId,
     AuthorityList as GrandpaAuthorityList,
@@ -81,8 +81,8 @@ pub use frame_support::{
     },
     StorageValue,
 };
-pub use pallet_balances::Call as BalancesCall;
-pub use pallet_timestamp::Call as TimestampCall;
+pub use noble_balances::Call as BalancesCall;
+pub use noble_timestamp::Call as TimestampCall;
 #[cfg(any(feature = "std", test))]
 pub use sp_runtime::BuildStorage;
 pub use sp_runtime::{
@@ -233,18 +233,18 @@ impl frame_system::Trait for Runtime {
     /// What to do if an account is fully reaped from the system.
     type OnKilledAccount = ();
     /// The data to be stored in an account.
-    type AccountData = pallet_balances::AccountData<Balance>;
-    /// Weight information for the extrinsics of this pallet.
+    type AccountData = noble_balances::AccountData<Balance>;
+    /// Weight information for the extrinsics of this noble.
     type SystemWeightInfo = ();
-    /// Provides information about the pallet setup in the runtime.
-    type PalletInfo = PalletInfo;
+    /// Provides information about the noble setup in the runtime.
+    type NobleInfo = NobleInfo;
 }
 
-impl pallet_aura::Trait for Runtime {
+impl noble_aura::Trait for Runtime {
     type AuthorityId = AuraId;
 }
 
-impl pallet_grandpa::Trait for Runtime {
+impl noble_grandpa::Trait for Runtime {
     type Event = Event;
     type Call = Call;
 
@@ -266,7 +266,7 @@ parameter_types! {
     pub const MinimumPeriod: u64 = SLOT_DURATION / 2;
 }
 
-impl pallet_timestamp::Trait for Runtime {
+impl noble_timestamp::Trait for Runtime {
     /// A timestamp: milliseconds since the unix epoch.
     type Moment = u64;
     type OnTimestampSet = Aura;
@@ -278,7 +278,7 @@ parameter_types! {
     pub const ExistentialDeposit: u128 = 500;
 }
 
-impl pallet_balances::Trait for Runtime {
+impl noble_balances::Trait for Runtime {
     /// The type for recording an account's balance.
     type Balance = Balance;
     /// The ubiquitous event type.
@@ -294,15 +294,15 @@ parameter_types! {
     pub const TransactionByteFee: Balance = 1;
 }
 
-impl pallet_transaction_payment::Trait for Runtime {
-    type Currency = pallet_balances::Module<Runtime>;
+impl noble_transaction_payment::Trait for Runtime {
+    type Currency = noble_balances::Module<Runtime>;
     type OnTransactionPayment = ();
     type TransactionByteFee = TransactionByteFee;
     type WeightToFee = IdentityFee<Balance>;
     type FeeMultiplierUpdate = ();
 }
 
-impl pallet_sudo::Trait for Runtime {
+impl noble_sudo::Trait for Runtime {
     type Event = Event;
     type Call = Call;
 }
@@ -314,13 +314,13 @@ construct_runtime!(
         UncheckedExtrinsic = UncheckedExtrinsic
     {
         System: frame_system::{Module, Call, Config, Storage, Event<T>},
-        RandomnessCollectiveFlip: pallet_randomness_collective_flip::{Module, Call, Storage},
-        Timestamp: pallet_timestamp::{Module, Call, Storage, Inherent},
-        Aura: pallet_aura::{Module, Config<T>, Inherent},
-        Grandpa: pallet_grandpa::{Module, Call, Storage, Config, Event},
-        Balances: pallet_balances::{Module, Call, Storage, Config<T>, Event<T>},
-        TransactionPayment: pallet_transaction_payment::{Module, Storage},
-        Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
+        RandomnessCollectiveFlip: noble_randomness_collective_flip::{Module, Call, Storage},
+        Timestamp: noble_timestamp::{Module, Call, Storage, Inherent},
+        Aura: noble_aura::{Module, Config<T>, Inherent},
+        Grandpa: noble_grandpa::{Module, Call, Storage, Config, Event},
+        Balances: noble_balances::{Module, Call, Storage, Config<T>, Event<T>},
+        TransactionPayment: noble_transaction_payment::{Module, Storage},
+        Sudo: noble_sudo::{Module, Call, Config<T>, Storage, Event<T>},
     }
 );
 
@@ -342,7 +342,7 @@ pub type SignedExtra = (
     frame_system::CheckEra<Runtime>,
     frame_system::CheckNonce<Runtime>,
     frame_system::CheckWeight<Runtime>,
-    pallet_transaction_payment::ChargeTransactionPayment<Runtime>,
+    noble_transaction_payment::ChargeTransactionPayment<Runtime>,
 );
 /// Unchecked extrinsic type as expected by this runtime.
 pub type UncheckedExtrinsic =

@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,9 +12,9 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-//! Implements support for the pallet_balances module.
+//! Implements support for the noble_balances module.
 
 use crate::frame::system::{
     System,
@@ -36,7 +36,7 @@ use sp_runtime::traits::{
 };
 use std::fmt::Debug;
 
-/// The subset of the `pallet_balances::Trait` that a client must implement.
+/// The subset of the `noble_balances::Trait` that a client must implement.
 #[module]
 pub trait Balances: System {
     /// The balance of an account.

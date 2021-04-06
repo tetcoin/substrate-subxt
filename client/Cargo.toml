@@ -1,15 +1,15 @@
 [package]
-name = "substrate-subxt-client"
+name = "tetcore-subxt-client"
 version = "0.5.0"
 authors = ["David Craven <david@craven.ch>", "Parity Technologies <admin@parity.io>"]
 edition = "2018"
 
 license = "GPL-3.0"
-repository = "https://github.com/paritytech/substrate-subxt"
-documentation = "https://docs.rs/substrate-subxt-client"
-homepage = "https://www.parity.io/"
-description = "Embed a substrate node into your subxt application."
-keywords = ["parity", "substrate", "blockchain"]
+repository = "https://github.com/tetcoin/tetcore-subxt"
+documentation = "https://docs.rs/tetcore-subxt-client"
+homepage = "https://core.tetcoin.org/"
+description = "Embed a tetcore node into your subxt application."
+keywords = ["tetcoin", "tetcore", "blockchain"]
 
 [dependencies]
 async-std = "1.8.0"
@@ -26,6 +26,6 @@ thiserror = "1.0.23"
 [dev-dependencies]
 async-std = { version = "1.8.0", features = ["attributes"] }
 env_logger = "0.8.2"
-substrate-subxt = { path = ".." }
+tetcore-subxt = { path = ".." }
 tempdir = "0.3.7"
 test-node = { path = "../test-node" }

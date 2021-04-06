@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 //! Session support
 use crate::frame::{
@@ -35,7 +35,7 @@ use std::{
     fmt::Debug,
     marker::PhantomData,
 };
-use substrate_subxt_proc_macro::Store;
+use tetcore_subxt_proc_macro::Store;
 
 /// Impls `Default::default` for some types that have a `_runtime` field of type
 /// `PhantomData` as their only field.
@@ -53,7 +53,7 @@ macro_rules! default_impl {
 
 type IdentificationTuple<T> = (
     <T as Session>::ValidatorId,
-    pallet_staking::Exposure<<T as System>::AccountId, <T as Balances>::Balance>,
+    noble_staking::Exposure<<T as System>::AccountId, <T as Balances>::Balance>,
 );
 
 /// The trait needed for this module.

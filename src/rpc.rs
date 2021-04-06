@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,11 +12,11 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 // jsonrpsee subscriptions are interminable.
 // Allows `while let status = subscription.next().await {}`
-// Related: https://github.com/paritytech/substrate-subxt/issues/66
+// Related: https://github.com/paritytech/tetcore-subxt/issues/66
 #![allow(irrefutable_let_patterns)]
 
 use codec::{
@@ -97,7 +97,7 @@ impl From<u32> for BlockNumber {
     }
 }
 
-/// System properties for a Substrate-based runtime
+/// System properties for a Tetcore-based runtime
 #[derive(serde::Serialize, Deserialize, Debug, Clone, PartialEq, Eq, Default)]
 #[serde(rename_all = "camelCase")]
 pub struct SystemProperties {
@@ -114,7 +114,7 @@ pub struct SystemProperties {
 /// # Note
 ///
 /// This is copied from `sp-transaction-pool` to avoid a dependency on that crate. Therefore it
-/// must be kept compatible with that type from the target substrate version.
+/// must be kept compatible with that type from the target tetcore version.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum TransactionStatus<Hash, BlockHash> {
@@ -147,7 +147,7 @@ pub enum TransactionStatus<Hash, BlockHash> {
 /// # Note
 ///
 /// This is copied from `sc-rpc-api` to avoid a dependency on that crate. Therefore it
-/// must be kept compatible with that type from the target substrate version.
+/// must be kept compatible with that type from the target tetcore version.
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReadProof<Hash> {
@@ -157,7 +157,7 @@ pub struct ReadProof<Hash> {
     pub proof: Vec<Bytes>,
 }
 
-/// Client for substrate rpc interfaces
+/// Client for tetcore rpc interfaces
 pub struct Rpc<T: Runtime> {
     client: Client,
     marker: PhantomData<T>,
@@ -344,7 +344,7 @@ impl<T: Runtime> Rpc<T> {
         Ok(version)
     }
 
-    /// Subscribe to substrate System Events
+    /// Subscribe to tetcore System Events
     pub async fn subscribe_events(
         &self,
     ) -> Result<Subscription<StorageChangeSet<T::Hash>>, Error> {

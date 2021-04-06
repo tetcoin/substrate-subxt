@@ -2,12 +2,12 @@
 name = "test-node"
 version = "2.0.0"
 authors = ["Anonymous"]
-description = "Substrate Node template"
+description = "Tetcore Node template"
 edition = "2018"
 license = "Unlicense"
 build = "build.rs"
-homepage = "https://substrate.dev"
-repository = "https://github.com/paritytech/substrate/"
+homepage = "https://core.tetcoin.org"
+repository = "https://github.com/tetcoin/tetcore/"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
@@ -39,4 +39,4 @@ sc-basic-authorship = "0.8.1"
 test-node-runtime = { path = "runtime" }
 
 [build-dependencies]
-substrate-build-script-utils = "2.0.1"
+tetcore-build-script-utils = "2.0.1"

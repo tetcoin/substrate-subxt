@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use crate::{
     chain_spec,
@@ -26,12 +26,12 @@ use sc_cli::{
     ChainSpec,
     Role,
     RuntimeVersion,
-    SubstrateCli,
+    TetcoreCli,
 };
 
-impl SubstrateCli for Cli {
+impl TetcoreCli for Cli {
     fn impl_name() -> String {
-        "Substrate Node".into()
+        "Tetcore Node".into()
     }
 
     fn impl_version() -> String {

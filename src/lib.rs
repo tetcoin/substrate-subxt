@@ -1,5 +1,5 @@
 // Copyright 2019-2020 Parity Technologies (UK) Ltd.
-// This file is part of substrate-subxt.
+// This file is part of tetcore-subxt.
 //
 // subxt is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -12,10 +12,10 @@
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with substrate-subxt.  If not, see <http://www.gnu.org/licenses/>.
+// along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 //! A library to **sub**mit e**xt**rinsics to a
-//! [substrate](https://github.com/paritytech/substrate) node via RPC.
+//! [tetcore](https://github.com/paritytech/tetcore) node via RPC.
 
 #![deny(
     bad_style,
@@ -41,10 +41,10 @@
 #![allow(clippy::type_complexity)]
 
 #[macro_use]
-extern crate substrate_subxt_proc_macro;
+extern crate tetcore_subxt_proc_macro;
 
 #[cfg(feature = "client")]
-pub use substrate_subxt_client as client;
+pub use tetcore_subxt_client as client;
 
 pub use sp_core;
 pub use sp_runtime;
@@ -98,7 +98,7 @@ pub use crate::{
     },
     runtimes::*,
     subscription::*,
-    substrate_subxt_proc_macro::*,
+    tetcore_subxt_proc_macro::*,
 };
 use crate::{
     frame::system::{
@@ -138,7 +138,7 @@ impl<T: Runtime> ClientBuilder<T> {
         self
     }
 
-    /// Set the substrate rpc address.
+    /// Set the tetcore rpc address.
     pub fn set_url<P: Into<String>>(mut self, url: P) -> Self {
         self.url = Some(url.into());
         self
@@ -182,7 +182,7 @@ impl<T: Runtime> ClientBuilder<T> {
     }
 }
 
-/// Client to interface with a substrate node.
+/// Client to interface with a tetcore node.
 pub struct Client<T: Runtime> {
     rpc: Rpc<T>,
     genesis_hash: T::Hash,
@@ -577,7 +577,7 @@ mod tests {
         StorageKey,
     };
     use sp_keyring::AccountKeyring;
-    use substrate_subxt_client::{
+    use tetcore_subxt_client::{
         DatabaseConfig,
         KeystoreConfig,
         Role,
@@ -594,9 +594,9 @@ mod tests {
         env_logger::try_init().ok();
         let tmp = TempDir::new("subxt-").expect("failed to create tempdir");
         let config = SubxtClientConfig {
-            impl_name: "substrate-subxt-full-client",
+            impl_name: "tetcore-subxt-full-client",
             impl_version: "0.0.1",
-            author: "substrate subxt",
+            author: "tetcore subxt",
             copyright_start_year: 2020,
             db: DatabaseConfig::RocksDb {
                 path: tmp.path().join("db"),
