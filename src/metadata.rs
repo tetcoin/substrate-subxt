@@ -27,7 +27,7 @@ use codec::{
     Error as CodecError,
 };
 
-use frame_metadata::{
+use fabric_metadata::{
     DecodeDifferent,
     RuntimeMetadata,
     RuntimeMetadataPrefixed,
@@ -629,7 +629,7 @@ fn convert<B: 'static, O: 'static>(
 }
 
 fn convert_event(
-    event: frame_metadata::EventMetadata,
+    event: fabric_metadata::EventMetadata,
 ) -> Result<ModuleEventMetadata, ConversionError> {
     let name = convert(event.name)?;
     let mut arguments = Vec::new();
@@ -643,7 +643,7 @@ fn convert_event(
 fn convert_entry(
     module_prefix: String,
     storage_prefix: String,
-    entry: frame_metadata::StorageEntryMetadata,
+    entry: fabric_metadata::StorageEntryMetadata,
 ) -> Result<StorageMetadata, ConversionError> {
     let default = convert(entry.default)?;
     Ok(StorageMetadata {
@@ -656,13 +656,13 @@ fn convert_entry(
 }
 
 fn convert_error(
-    error: frame_metadata::ErrorMetadata,
+    error: fabric_metadata::ErrorMetadata,
 ) -> Result<String, ConversionError> {
     convert(error.name)
 }
 
 fn convert_constant(
-    constant: frame_metadata::ModuleConstantMetadata,
+    constant: fabric_metadata::ModuleConstantMetadata,
 ) -> Result<ModuleConstantMetadata, ConversionError> {
     let name = convert(constant.name)?;
     let ty = convert(constant.ty)?;

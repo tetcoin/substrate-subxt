@@ -25,7 +25,7 @@ use crate::{
         Raw,
         RawEvent,
     },
-    frame::{
+    fabric::{
         system::Phase,
         Event,
     },

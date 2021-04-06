@@ -164,7 +164,7 @@ fn testnet_genesis(
     _enable_println: bool,
 ) -> GenesisConfig {
     GenesisConfig {
-        frame_system: Some(SystemConfig {
+        fabric_system: Some(SystemConfig {
             // Add Wasm runtime to storage.
             code: wasm_binary.to_vec(),
             changes_trie_config: Default::default(),

@@ -195,7 +195,7 @@ mod tests {
         let attr = quote!(#[module]);
         let input = quote! {
             pub trait Balances: System {
-                type Balance: frame_support::Parameter
+                type Balance: fabric_support::Parameter
                     + sp_runtime::traits::Member
                     + sp_runtime::traits::AtLeast32Bit
                     + codec::Codec
@@ -208,7 +208,7 @@ mod tests {
         };
         let expected = quote! {
             pub trait Balances: System {
-                type Balance: frame_support::Parameter
+                type Balance: fabric_support::Parameter
                     + sp_runtime::traits::Member
                     + sp_runtime::traits::AtLeast32Bit
                     + codec::Codec

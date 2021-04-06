@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-//! Implements support for the frame_system module.
+//! Implements support for the fabric_system module.
 
 use codec::{
     Codec,
@@ -22,7 +22,7 @@ use codec::{
     Encode,
 };
 use core::marker::PhantomData;
-use frame_support::{
+use fabric_support::{
     weights::DispatchInfo,
     Parameter,
 };
@@ -47,7 +47,7 @@ use sp_runtime::{
 };
 use std::fmt::Debug;
 
-/// The subset of the `frame::Trait` that a client must implement.
+/// The subset of the `fabric::Trait` that a client must implement.
 #[module]
 pub trait System {
     /// Account index (aka nonce) type. This stores the number of previous
@@ -98,7 +98,7 @@ pub trait System {
     /// The user account identifier type for the runtime.
     type AccountId: Parameter + Member + MaybeSerialize + MaybeDisplay + Ord + Default;
 
-    /// The address type. This instead of `<frame_system::Trait::Lookup as StaticLookup>::Source`.
+    /// The address type. This instead of `<fabric_system::Trait::Lookup as StaticLookup>::Source`.
     #[module(ignore)]
     type Address: Codec + Clone + PartialEq + Debug + Send + Sync;
 

@@ -15,7 +15,7 @@
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 //! Session support
-use crate::frame::{
+use crate::fabric::{
     balances::{
         Balances,
         BalancesEventsDecoder as _,
@@ -26,7 +26,7 @@ use crate::frame::{
     },
 };
 use codec::Encode;
-use frame_support::Parameter;
+use fabric_support::Parameter;
 use sp_runtime::traits::{
     Member,
     OpaqueKeys,

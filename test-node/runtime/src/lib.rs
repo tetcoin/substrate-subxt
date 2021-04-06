@@ -62,7 +62,7 @@ use sp_version::NativeVersion;
 use sp_version::RuntimeVersion;
 
 // A few exports that help ease life for downstream crates.
-pub use frame_support::{
+pub use fabric_support::{
     construct_runtime,
     parameter_types,
     traits::{
@@ -183,7 +183,7 @@ parameter_types! {
     pub const Version: RuntimeVersion = VERSION;
 }
 
-impl frame_system::Trait for Runtime {
+impl fabric_system::Trait for Runtime {
     /// The basic call filter to use in dispatchable.
     type BaseCallFilter = ();
     /// The identifier used to distinguish between accounts.
@@ -313,7 +313,7 @@ construct_runtime!(
         NodeBlock = opaque::Block,
         UncheckedExtrinsic = UncheckedExtrinsic
     {
-        System: frame_system::{Module, Call, Config, Storage, Event<T>},
+        System: fabric_system::{Module, Call, Config, Storage, Event<T>},
         RandomnessCollectiveFlip: noble_randomness_collective_flip::{Module, Call, Storage},
         Timestamp: noble_timestamp::{Module, Call, Storage, Inherent},
         Aura: noble_aura::{Module, Config<T>, Inherent},
@@ -336,12 +336,12 @@ pub type SignedBlock = generic::SignedBlock<Block>;
 pub type BlockId = generic::BlockId<Block>;
 /// The SignedExtension to the basic transaction logic.
 pub type SignedExtra = (
-    frame_system::CheckSpecVersion<Runtime>,
-    frame_system::CheckTxVersion<Runtime>,
-    frame_system::CheckGenesis<Runtime>,
-    frame_system::CheckEra<Runtime>,
-    frame_system::CheckNonce<Runtime>,
-    frame_system::CheckWeight<Runtime>,
+    fabric_system::CheckSpecVersion<Runtime>,
+    fabric_system::CheckTxVersion<Runtime>,
+    fabric_system::CheckGenesis<Runtime>,
+    fabric_system::CheckEra<Runtime>,
+    fabric_system::CheckNonce<Runtime>,
+    fabric_system::CheckWeight<Runtime>,
     noble_transaction_payment::ChargeTransactionPayment<Runtime>,
 );
 /// Unchecked extrinsic type as expected by this runtime.
@@ -350,10 +350,10 @@ pub type UncheckedExtrinsic =
 /// Extrinsic type that has already been checked.
 pub type CheckedExtrinsic = generic::CheckedExtrinsic<AccountId, Call, SignedExtra>;
 /// Executive: handles dispatch to the various modules.
-pub type Executive = frame_executive::Executive<
+pub type Executive = fabric_executive::Executive<
     Runtime,
     Block,
-    frame_system::ChainContext<Runtime>,
+    fabric_system::ChainContext<Runtime>,
     Runtime,
     AllModules,
 >;

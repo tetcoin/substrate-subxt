@@ -13,9 +13,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 codec = { package = "tetsy-scale-codec", version = "1.3.5", default-features = false, features = ["derive"] }
 
-frame-executive = { version = "2.0.0", default-features = false }
-frame-support = { version = "2.0.0", default-features = false }
-frame-system = { version = "2.0.0", default-features = false }
+fabric-executive = { version = "2.0.0", default-features = false }
+fabric-support = { version = "2.0.0", default-features = false }
+fabric-system = { version = "2.0.0", default-features = false }
 noble-aura = { version = "2.0.0", default-features = false }
 noble-balances = { version = "2.0.0", default-features = false }
 noble-grandpa = { version = "2.0.0", default-features = false }
@@ -45,9 +45,9 @@ tetcore-wasm-builder-runner = "1.0.6"
 default = ["std"]
 std = [
 	"codec/std",
-	"frame-executive/std",
-	"frame-support/std",
-	"frame-system/std",
+	"fabric-executive/std",
+	"fabric-support/std",
+	"fabric-system/std",
 	"noble-aura/std",
 	"noble-balances/std",
 	"noble-grandpa/std",

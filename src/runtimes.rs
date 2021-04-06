@@ -143,7 +143,7 @@ use crate::{
         DefaultExtra,
         SignedExtra,
     },
-    frame::{
+    fabric::{
         balances::{
             AccountData,
             Balances,

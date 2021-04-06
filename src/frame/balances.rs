@@ -16,7 +16,7 @@
 
 //! Implements support for the noble_balances module.
 
-use crate::frame::system::{
+use crate::fabric::system::{
     System,
     SystemEventsDecoder,
 };
@@ -25,7 +25,7 @@ use codec::{
     Encode,
 };
 use core::marker::PhantomData;
-use frame_support::{
+use fabric_support::{
     traits::LockIdentifier,
     Parameter,
 };
@@ -229,7 +229,7 @@ mod tests {
     #[cfg(feature = "integration-tests")]
     async fn test_state_balance_lock() -> Result<(), crate::Error> {
         use crate::{
-            frame::staking::{
+            fabric::staking::{
                 BondCallExt,
                 RewardDestination,
             },

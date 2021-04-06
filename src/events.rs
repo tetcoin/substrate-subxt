@@ -22,7 +22,7 @@ use codec::{
     Input,
     Output,
 };
-use frame_support::dispatch::DispatchInfo;
+use fabric_support::dispatch::DispatchInfo;
 use sp_runtime::{
     DispatchError,
     DispatchResult,
@@ -314,7 +314,7 @@ pub enum Raw {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use frame_metadata::{
+    use fabric_metadata::{
         DecodeDifferent,
         ErrorMetadata,
         EventMetadata,

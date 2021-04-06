@@ -14,10 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-//! Implements support for the frame_sudo module.
+//! Implements support for the fabric_sudo module.
 
 use crate::{
-    frame::system::{
+    fabric::system::{
         System,
         SystemEventsDecoder,
     },
@@ -25,9 +25,9 @@ use crate::{
 };
 use codec::Encode;
 use core::marker::PhantomData;
-use frame_support::weights::Weight;
+use fabric_support::weights::Weight;
 
-/// The subset of the `frame_sudo::Trait` that a client must implement.
+/// The subset of the `fabric_sudo::Trait` that a client must implement.
 #[module]
 pub trait Sudo: System {}
 
@@ -63,7 +63,7 @@ mod tests {
             RuntimeError,
         },
         extrinsic::PairSigner,
-        frame::balances::TransferCall,
+        fabric::balances::TransferCall,
         tests::{
             test_client,
             TestRuntime,

@@ -28,7 +28,7 @@ use core::{
     convert::TryInto,
     marker::PhantomData,
 };
-use frame_metadata::RuntimeMetadataPrefixed;
+use fabric_metadata::RuntimeMetadataPrefixed;
 use jsonrpsee::{
     client::Subscription,
     common::{
@@ -69,7 +69,7 @@ use crate::{
         EventsDecoder,
         RawEvent,
     },
-    frame::{
+    fabric::{
         system::System,
         Event,
     },

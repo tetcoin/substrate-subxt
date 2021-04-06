@@ -29,7 +29,7 @@ use sp_runtime::{
 };
 
 use crate::{
-    frame::{
+    fabric::{
         balances::Balances,
         system::System,
     },
@@ -40,7 +40,7 @@ use crate::{
 pub type Extra<T> = <<T as Runtime>::Extra as SignedExtra<T>>::Extra;
 
 /// SignedExtra checks copied from tetcore, in order to remove requirement to implement
-/// tetcore's `frame_system::Trait`
+/// tetcore's `fabric_system::Trait`
 
 /// Ensure the runtime version registered in the transaction is the same as at present.
 ///

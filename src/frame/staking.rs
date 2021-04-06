@@ -69,7 +69,7 @@ pub type AuthorityWeight = u64;
 /// A list of Grandpa authorities with associated weights.
 pub type AuthorityList = Vec<(AuthorityId, AuthorityWeight)>;
 
-/// The subset of the `frame::Trait` that a client must implement.
+/// The subset of the `fabric::Trait` that a client must implement.
 #[module]
 #[rustfmt::skip]
 pub trait Staking: Balances {
@@ -231,7 +231,7 @@ mod tests {
             PairSigner,
             Signer,
         },
-        frame::balances::*,
+        fabric::balances::*,
         runtimes::KusamaRuntime as RT,
         ClientBuilder,
         Error,

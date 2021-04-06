@@ -42,7 +42,7 @@ use sp_runtime::traits::SignedExtension;
 use sp_version::RuntimeVersion;
 
 use crate::{
-    frame::system::System,
+    fabric::system::System,
     runtimes::Runtime,
     Encoded,
     Error,

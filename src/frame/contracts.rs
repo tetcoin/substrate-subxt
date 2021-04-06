@@ -16,7 +16,7 @@
 
 //! Implements support for the noble_contracts module.
 
-use crate::frame::{
+use crate::fabric::{
     balances::{
         Balances,
         BalancesEventsDecoder,

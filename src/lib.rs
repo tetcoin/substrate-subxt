@@ -67,7 +67,7 @@ use std::marker::PhantomData;
 mod error;
 mod events;
 pub mod extrinsic;
-mod frame;
+mod fabric;
 mod metadata;
 mod rpc;
 mod runtimes;
@@ -85,7 +85,7 @@ pub use crate::{
         Signer,
         UncheckedExtrinsic,
     },
-    frame::*,
+    fabric::*,
     metadata::{
         Metadata,
         MetadataError,
@@ -101,7 +101,7 @@ pub use crate::{
     tetcore_subxt_proc_macro::*,
 };
 use crate::{
-    frame::system::{
+    fabric::system::{
         AccountStoreExt,
         Phase,
         System,
