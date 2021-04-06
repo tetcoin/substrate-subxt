@@ -27,7 +27,7 @@ use codec::{
     Decode,
     Encode,
 };
-use sp_core::storage::StorageKey;
+use tet_core::storage::StorageKey;
 
 pub mod balances;
 pub mod contracts;

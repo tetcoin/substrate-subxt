@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-use sp_keyring::AccountKeyring;
+use tp_keyring::AccountKeyring;
 use tetcore_subxt::{
     balances::*,
     ClientBuilder,

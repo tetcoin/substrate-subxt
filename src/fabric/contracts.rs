@@ -130,7 +130,7 @@ pub struct ContractExecutionEvent<T: Contracts> {
 #[cfg(test)]
 #[cfg(feature = "integration-tests")]
 mod tests {
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
 
     use super::*;
     use crate::{
@@ -144,7 +144,7 @@ mod tests {
         PairSigner,
         Signer,
     };
-    use sp_core::{
+    use tet_core::{
         crypto::AccountId32,
         sr25519::Pair,
     };
@@ -188,7 +188,7 @@ mod tests {
             client: &Client<ContractsTemplateRuntime>,
             stash: &mut PairSigner<ContractsTemplateRuntime, Pair>,
         ) -> PairSigner<ContractsTemplateRuntime, Pair> {
-            use sp_core::Pair as _;
+            use tet_core::Pair as _;
             let new_account = Pair::generate().0;
             let new_account_id: AccountId32 = new_account.public().into();
             // fund the account

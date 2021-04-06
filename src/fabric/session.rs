@@ -27,7 +27,7 @@ use crate::fabric::{
 };
 use codec::Encode;
 use fabric_support::Parameter;
-use sp_runtime::traits::{
+use tp_runtime::traits::{
     Member,
     OpaqueKeys,
 };

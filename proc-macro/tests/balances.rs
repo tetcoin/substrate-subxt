@@ -22,10 +22,10 @@ use codec::{
     Decode,
     Encode,
 };
-use sp_keyring::AccountKeyring;
+use tp_keyring::AccountKeyring;
 use std::fmt::Debug;
 use tetcore_subxt::{
-    sp_runtime::traits::{
+    tp_runtime::traits::{
         AtLeast32Bit,
         MaybeSerialize,
         Member,

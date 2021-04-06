@@ -14,7 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
-use tetcore_wasm_builder_runner::WasmBuilder;
+// use tetcore_wasm_builder_runner::WasmBuilder;
+use wasm_builder_runner::WasmBuilder;
 
 fn main() {
     WasmBuilder::new()

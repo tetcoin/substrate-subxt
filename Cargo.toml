@@ -32,29 +32,29 @@ num-traits = { version = "0.2.14", default-features = false }
 serde = { version = "1.0.119", features = ["derive"] }
 serde_json = "1.0.61"
 url = "2.2.0"
-codec = { package = "tetsy-scale-codec", version = "1.3.6", default-features = false, features = ["derive", "full"] }
+codec = { package = "tetsy-scale-codec", version = "2.0.1", default-features = false, features = ["derive", "full"] }
 
-fabric-metadata = "12.0.1"
-fabric-support = "2.0.1"
-sp-runtime = "2.0.1"
-sp-version = "2.0.1"
-noble-indices = "2.0.1"
+fabric-metadata = "12.0.0"
+fabric-support = "2.0.0"
+tp-runtime = "2.0.1"
+tp-version = "2.0.1"
+noble-indices = "2.0.0"
 hex = "0.4.2"
-sp-std = "2.0.1"
-application-crypto = { version = "2.0.1", package = "sp-application-crypto" }
-noble-staking = "2.0.1"
+tetcore-std = "2.0.1"
+application-crypto = { version = "2.0.1", package = "tet-application-crypto" }
+noble-staking = "2.0.0"
 
-sp-rpc = { version = "2.0.1", package = "sp-rpc" }
-sp-core = { version = "2.0.1", package = "sp-core" }
+tp-rpc = { version = "2.0.1", package = "tp-rpc" }
+tet-core = { version = "2.0.1", package = "tet-core" }
 tetcore-subxt-client = { version = "0.5.0", path = "client", optional = true }
 tetcore-subxt-proc-macro = { version = "0.13.0", path = "proc-macro" }
 
 [dev-dependencies]
 async-std = { version = "1.8.0", features = ["attributes"] }
 env_logger = "0.8.2"
-fabric-system = "2.0.1"
+fabric-system = "2.0.0"
 noble-balances = "2.0.1"
-sp-keyring = "2.0.1"
+tp-keyring = "2.0.1"
 tetcore-subxt-client = { version = "0.5.0", path = "client" }
 tempdir = "0.3.7"
 test-node = { path = "test-node" }

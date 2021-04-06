@@ -190,7 +190,7 @@ impl From<ItemTest> for Test {
 impl Test {
     fn into_tokens(self) -> TokenStream {
         let subxt = utils::use_crate("tetcore-subxt");
-        let sp_keyring = utils::use_crate("sp-keyring");
+        let tp_keyring = utils::use_crate("tp-keyring");
         let env_logger = utils::opt_crate("env_logger")
             .map(|env_logger| quote!(#env_logger::try_init().ok();));
         let Test {
@@ -212,20 +212,20 @@ impl Test {
                 #env_logger
                 let client = #subxt::ClientBuilder::<#runtime>::new()
                     .build().await.unwrap();
-                let signer = #subxt::PairSigner::new(#sp_keyring::AccountKeyring::#account.pair());
+                let signer = #subxt::PairSigner::new(#tp_keyring::AccountKeyring::#account.pair());
 
                 #[allow(unused)]
-                let alice = #sp_keyring::AccountKeyring::Alice.to_account_id();
+                let alice = #tp_keyring::AccountKeyring::Alice.to_account_id();
                 #[allow(unused)]
-                let bob = #sp_keyring::AccountKeyring::Bob.to_account_id();
+                let bob = #tp_keyring::AccountKeyring::Bob.to_account_id();
                 #[allow(unused)]
-                let charlie = #sp_keyring::AccountKeyring::Charlie.to_account_id();
+                let charlie = #tp_keyring::AccountKeyring::Charlie.to_account_id();
                 #[allow(unused)]
-                let dave = #sp_keyring::AccountKeyring::Dave.to_account_id();
+                let dave = #tp_keyring::AccountKeyring::Dave.to_account_id();
                 #[allow(unused)]
-                let eve = #sp_keyring::AccountKeyring::Eve.to_account_id();
+                let eve = #tp_keyring::AccountKeyring::Eve.to_account_id();
                 #[allow(unused)]
-                let ferdie = #sp_keyring::AccountKeyring::Ferdie.to_account_id();
+                let ferdie = #tp_keyring::AccountKeyring::Ferdie.to_account_id();
 
                 #(#prelude)*
 
@@ -429,19 +429,19 @@ mod tests {
             async fn test_transfer_balance() {
                 env_logger::try_init().ok();
                 let client = tetcore_subxt::ClientBuilder::<KusamaRuntime>::new().build().await.unwrap();
-                let signer = tetcore_subxt::PairSigner::new(sp_keyring::AccountKeyring::Alice.pair());
+                let signer = tetcore_subxt::PairSigner::new(tp_keyring::AccountKeyring::Alice.pair());
                 #[allow(unused)]
-                let alice = sp_keyring::AccountKeyring::Alice.to_account_id();
+                let alice = tp_keyring::AccountKeyring::Alice.to_account_id();
                 #[allow(unused)]
-                let bob = sp_keyring::AccountKeyring::Bob.to_account_id();
+                let bob = tp_keyring::AccountKeyring::Bob.to_account_id();
                 #[allow(unused)]
-                let charlie = sp_keyring::AccountKeyring::Charlie.to_account_id();
+                let charlie = tp_keyring::AccountKeyring::Charlie.to_account_id();
                 #[allow(unused)]
-                let dave = sp_keyring::AccountKeyring::Dave.to_account_id();
+                let dave = tp_keyring::AccountKeyring::Dave.to_account_id();
                 #[allow(unused)]
-                let eve = sp_keyring::AccountKeyring::Eve.to_account_id();
+                let eve = tp_keyring::AccountKeyring::Eve.to_account_id();
                 #[allow(unused)]
-                let ferdie = sp_keyring::AccountKeyring::Ferdie.to_account_id();
+                let ferdie = tp_keyring::AccountKeyring::Ferdie.to_account_id();
 
                 {
                     struct State<A, B> {

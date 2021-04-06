@@ -41,7 +41,7 @@ use serde::{
     Deserialize,
     Serialize,
 };
-use sp_core::{
+use tet_core::{
     storage::{
         StorageChangeSet,
         StorageData,
@@ -50,18 +50,18 @@ use sp_core::{
     twox_128,
     Bytes,
 };
-use sp_rpc::{
+use tp_rpc::{
     list::ListOrValue,
     number::NumberOrHex,
 };
-use sp_runtime::{
+use tp_runtime::{
     generic::{
         Block,
         SignedBlock,
     },
     traits::Hash,
 };
-use sp_version::RuntimeVersion;
+use tp_version::RuntimeVersion;
 
 use crate::{
     error::Error,
@@ -113,7 +113,7 @@ pub struct SystemProperties {
 ///
 /// # Note
 ///
-/// This is copied from `sp-transaction-pool` to avoid a dependency on that crate. Therefore it
+/// This is copied from `tp-transaction-pool` to avoid a dependency on that crate. Therefore it
 /// must be kept compatible with that type from the target tetcore version.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -146,7 +146,7 @@ pub enum TransactionStatus<Hash, BlockHash> {
 ///
 /// # Note
 ///
-/// This is copied from `sc-rpc-api` to avoid a dependency on that crate. Therefore it
+/// This is copied from `tc-rpc-api` to avoid a dependency on that crate. Therefore it
 /// must be kept compatible with that type from the target tetcore version.
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]

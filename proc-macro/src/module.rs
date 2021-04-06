@@ -196,12 +196,12 @@ mod tests {
         let input = quote! {
             pub trait Balances: System {
                 type Balance: fabric_support::Parameter
-                    + sp_runtime::traits::Member
-                    + sp_runtime::traits::AtLeast32Bit
+                    + tp_runtime::traits::Member
+                    + tp_runtime::traits::AtLeast32Bit
                     + codec::Codec
                     + Default
                     + Copy
-                    + sp_runtime::traits::MaybeSerialize
+                    + tp_runtime::traits::MaybeSerialize
                     + std::fmt::Debug
                     + From<<Self as System>::BlockNumber>;
             }
@@ -209,12 +209,12 @@ mod tests {
         let expected = quote! {
             pub trait Balances: System {
                 type Balance: fabric_support::Parameter
-                    + sp_runtime::traits::Member
-                    + sp_runtime::traits::AtLeast32Bit
+                    + tp_runtime::traits::Member
+                    + tp_runtime::traits::AtLeast32Bit
                     + codec::Codec
                     + Default
                     + Copy
-                    + sp_runtime::traits::MaybeSerialize
+                    + tp_runtime::traits::MaybeSerialize
                     + std::fmt::Debug
                     + From< <Self as System>::BlockNumber>;
             }

@@ -36,7 +36,7 @@ use fabric_metadata::{
     StorageHasher,
     META_RESERVED,
 };
-use sp_core::storage::StorageKey;
+use tet_core::storage::StorageKey;
 
 use crate::Encoded;
 
@@ -268,8 +268,8 @@ pub struct StorageMetadata {
 
 impl StorageMetadata {
     pub fn prefix(&self) -> StorageKey {
-        let mut bytes = sp_core::twox_128(self.module_prefix.as_bytes()).to_vec();
-        bytes.extend(&sp_core::twox_128(self.storage_prefix.as_bytes())[..]);
+        let mut bytes = tet_core::twox_128(self.module_prefix.as_bytes()).to_vec();
+        bytes.extend(&tet_core::twox_128(self.storage_prefix.as_bytes())[..]);
         StorageKey(bytes)
     }
 
@@ -280,20 +280,20 @@ impl StorageMetadata {
     pub fn hash(hasher: &StorageHasher, bytes: &[u8]) -> Vec<u8> {
         match hasher {
             StorageHasher::Identity => bytes.to_vec(),
-            StorageHasher::Blake2_128 => sp_core::blake2_128(bytes).to_vec(),
+            StorageHasher::Blake2_128 => tet_core::blake2_128(bytes).to_vec(),
             StorageHasher::Blake2_128Concat => {
                 // copied from tetcore Blake2_128Concat::hash since StorageHasher is not public
-                sp_core::blake2_128(bytes)
+                tet_core::blake2_128(bytes)
                     .iter()
                     .chain(bytes)
                     .cloned()
                     .collect()
             }
-            StorageHasher::Blake2_256 => sp_core::blake2_256(bytes).to_vec(),
-            StorageHasher::Twox128 => sp_core::twox_128(bytes).to_vec(),
-            StorageHasher::Twox256 => sp_core::twox_256(bytes).to_vec(),
+            StorageHasher::Blake2_256 => tet_core::blake2_256(bytes).to_vec(),
+            StorageHasher::Twox128 => tet_core::twox_128(bytes).to_vec(),
+            StorageHasher::Twox256 => tet_core::twox_256(bytes).to_vec(),
             StorageHasher::Twox64Concat => {
-                sp_core::twox_64(bytes)
+                tet_core::twox_64(bytes)
                     .iter()
                     .chain(bytes)
                     .cloned()

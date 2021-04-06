@@ -34,8 +34,8 @@ use sc_service::{
     RpcHandlers,
     TaskManager,
 };
-use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
-use sp_inherents::InherentDataProviders;
+use tp_consensus_aura::sr25519::AuthorityPair as AuraPair;
+use tp_inherents::InherentDataProviders;
 use std::{
     sync::Arc,
     time::Duration,
@@ -64,7 +64,7 @@ pub fn new_partial(
         FullClient,
         FullBackend,
         FullSelectChain,
-        sp_consensus::DefaultImportQueue<Block, FullClient>,
+        tp_consensus::DefaultImportQueue<Block, FullClient>,
         sc_transaction_pool::FullPool<Block, FullClient>,
         (
             sc_finality_grandpa::GrandpaBlockImport<
@@ -78,7 +78,7 @@ pub fn new_partial(
     >,
     ServiceError,
 > {
-    let inherent_data_providers = sp_inherents::InherentDataProviders::new();
+    let inherent_data_providers = tp_inherents::InherentDataProviders::new();
 
     let (client, backend, keystore, task_manager) =
         sc_service::new_full_parts::<Block, RuntimeApi, Executor>(&config)?;
@@ -113,7 +113,7 @@ pub fn new_partial(
         inherent_data_providers.clone(),
         &task_manager.spawn_handle(),
         config.prometheus_registry(),
-        sp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone()),
+        tp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone()),
     )?;
 
     Ok(sc_service::PartialComponents {
@@ -202,7 +202,7 @@ pub fn new_full(
         );
 
         let can_author_with =
-            sp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone());
+            tp_consensus::CanAuthorWithNativeVersion::new(client.executor().clone());
 
         let aura = sc_consensus_aura::start_aura::<_, _, _, _, _, AuraPair, _, _, _>(
             sc_consensus_aura::slot_duration(&*client)?,
@@ -227,7 +227,7 @@ pub fn new_full(
     // if the node isn't actively participating in consensus then it doesn't
     // need a keystore, regardless of which protocol we use below.
     let keystore = if role.is_authority() {
-        Some(keystore as sp_core::traits::BareCryptoStorePtr)
+        Some(keystore as tet_core::traits::BareCryptoStorePtr)
     } else {
         None
     };
@@ -311,7 +311,7 @@ pub fn new_light(
         InherentDataProviders::new(),
         &task_manager.spawn_handle(),
         config.prometheus_registry(),
-        sp_consensus::NeverCanAuthor,
+        tp_consensus::NeverCanAuthor,
     )?;
 
     let finality_proof_provider =

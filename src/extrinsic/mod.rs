@@ -38,8 +38,8 @@ pub use self::{
     },
 };
 
-use sp_runtime::traits::SignedExtension;
-use sp_version::RuntimeVersion;
+use tp_runtime::traits::SignedExtension;
+use tp_version::RuntimeVersion;
 
 use crate::{
     fabric::system::System,
@@ -49,7 +49,7 @@ use crate::{
 };
 
 /// UncheckedExtrinsic type.
-pub type UncheckedExtrinsic<T> = sp_runtime::generic::UncheckedExtrinsic<
+pub type UncheckedExtrinsic<T> = tp_runtime::generic::UncheckedExtrinsic<
     <T as System>::Address,
     Encoded,
     <T as Runtime>::Signature,
@@ -57,7 +57,7 @@ pub type UncheckedExtrinsic<T> = sp_runtime::generic::UncheckedExtrinsic<
 >;
 
 /// SignedPayload type.
-pub type SignedPayload<T> = sp_runtime::generic::SignedPayload<Encoded, Extra<T>>;
+pub type SignedPayload<T> = tp_runtime::generic::SignedPayload<Encoded, Extra<T>>;
 
 /// Creates a signed extrinsic
 pub async fn create_signed<T>(

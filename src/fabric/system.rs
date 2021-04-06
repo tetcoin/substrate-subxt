@@ -27,7 +27,7 @@ use fabric_support::{
     Parameter,
 };
 use serde::de::DeserializeOwned;
-use sp_runtime::{
+use tp_runtime::{
     traits::{
         AtLeast32Bit,
         AtLeast32BitUnsigned,

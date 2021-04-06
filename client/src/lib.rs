@@ -170,7 +170,7 @@ pub enum Role {
     /// Light client.
     Light,
     /// A full node (maninly used for testing purposes).
-    Authority(sp_keyring::AccountKeyring),
+    Authority(tp_keyring::AccountKeyring),
 }
 
 impl From<Role> for sc_service::Role {
@@ -306,7 +306,7 @@ impl<C: ChainSpec + 'static> SubxtClientConfig<C> {
 mod tests {
     use super::*;
     use async_std::path::Path;
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
     use tetcore_subxt::{
         balances::TransferCallExt,
         ClientBuilder,

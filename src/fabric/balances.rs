@@ -29,7 +29,7 @@ use fabric_support::{
     traits::LockIdentifier,
     Parameter,
 };
-use sp_runtime::traits::{
+use tp_runtime::traits::{
     AtLeast32Bit,
     MaybeSerialize,
     Member,
@@ -171,11 +171,11 @@ mod tests {
             TestRuntime,
         },
     };
-    use sp_core::{
+    use tet_core::{
         sr25519::Pair,
         Pair as _,
     };
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
 
     #[async_std::test]
     async fn test_basic_transfer() {

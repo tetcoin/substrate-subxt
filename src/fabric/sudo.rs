@@ -69,7 +69,7 @@ mod tests {
             TestRuntime,
         },
     };
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
 
     #[async_std::test]
     async fn test_sudo() {

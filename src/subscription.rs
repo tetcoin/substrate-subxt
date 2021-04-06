@@ -15,7 +15,7 @@
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use jsonrpsee::client::Subscription;
-use sp_core::storage::StorageChangeSet;
+use tet_core::storage::StorageChangeSet;
 use std::collections::VecDeque;
 
 use crate::{

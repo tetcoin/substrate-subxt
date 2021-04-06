@@ -46,13 +46,13 @@ extern crate tetcore_subxt_proc_macro;
 #[cfg(feature = "client")]
 pub use tetcore_subxt_client as client;
 
-pub use sp_core;
-pub use sp_runtime;
+pub use tet_core;
+pub use tp_runtime;
 
 use codec::Decode;
 use futures::future;
 use jsonrpsee::client::Subscription;
-use sp_core::{
+use tet_core::{
     storage::{
         StorageChangeSet,
         StorageData,
@@ -60,8 +60,8 @@ use sp_core::{
     },
     Bytes,
 };
-pub use sp_runtime::traits::SignedExtension;
-pub use sp_version::RuntimeVersion;
+pub use tp_runtime::traits::SignedExtension;
+pub use tp_version::RuntimeVersion;
 use std::marker::PhantomData;
 
 mod error;
@@ -572,11 +572,11 @@ impl codec::Encode for Encoded {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use sp_core::storage::{
+    use tet_core::storage::{
         well_known_keys,
         StorageKey,
     };
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
     use tetcore_subxt_client::{
         DatabaseConfig,
         KeystoreConfig,

@@ -121,7 +121,7 @@ pub fn store(s: Structure) -> TokenStream {
 
             fn prefix(
                 metadata: &#subxt::Metadata,
-            ) -> Result<#subxt::sp_core::storage::StorageKey, #subxt::MetadataError> {
+            ) -> Result<#subxt::tet_core::storage::StorageKey, #subxt::MetadataError> {
                 Ok(metadata
                     .module(Self::MODULE)?
                     .storage(Self::FIELD)?
@@ -131,7 +131,7 @@ pub fn store(s: Structure) -> TokenStream {
             fn key(
                 &self,
                 metadata: &#subxt::Metadata,
-            ) -> Result<#subxt::sp_core::storage::StorageKey, #subxt::MetadataError> {
+            ) -> Result<#subxt::tet_core::storage::StorageKey, #subxt::MetadataError> {
                 Ok(metadata
                     .module(Self::MODULE)?
                     .storage(Self::FIELD)?
@@ -197,7 +197,7 @@ mod tests {
 
                 fn prefix(
                     metadata: &tetcore_subxt::Metadata,
-                ) -> Result<tetcore_subxt::sp_core::storage::StorageKey, tetcore_subxt::MetadataError> {
+                ) -> Result<tetcore_subxt::tet_core::storage::StorageKey, tetcore_subxt::MetadataError> {
                     Ok(metadata
                         .module(Self::MODULE)?
                         .storage(Self::FIELD)?
@@ -207,7 +207,7 @@ mod tests {
                 fn key(
                     &self,
                     metadata: &tetcore_subxt::Metadata,
-                ) -> Result<tetcore_subxt::sp_core::storage::StorageKey, tetcore_subxt::MetadataError> {
+                ) -> Result<tetcore_subxt::tet_core::storage::StorageKey, tetcore_subxt::MetadataError> {
                     Ok(metadata
                         .module(Self::MODULE)?
                         .storage(Self::FIELD)?

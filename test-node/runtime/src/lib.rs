@@ -30,13 +30,13 @@ use noble_grandpa::{
     AuthorityId as GrandpaId,
     AuthorityList as GrandpaAuthorityList,
 };
-use sp_api::impl_runtime_apis;
-use sp_consensus_aura::sr25519::AuthorityId as AuraId;
-use sp_core::{
+use tp_api::impl_runtime_apis;
+use tp_consensus_aura::sr25519::AuthorityId as AuraId;
+use tet_core::{
     crypto::KeyTypeId,
     OpaqueMetadata,
 };
-use sp_runtime::{
+use tp_runtime::{
     create_runtime_str,
     generic,
     impl_opaque_keys,
@@ -56,10 +56,10 @@ use sp_runtime::{
     ApplyExtrinsicResult,
     MultiSignature,
 };
-use sp_std::prelude::*;
+use tetcore_std::prelude::*;
 #[cfg(feature = "std")]
-use sp_version::NativeVersion;
-use sp_version::RuntimeVersion;
+use tp_version::NativeVersion;
+use tp_version::RuntimeVersion;
 
 // A few exports that help ease life for downstream crates.
 pub use fabric_support::{
@@ -84,8 +84,8 @@ pub use fabric_support::{
 pub use noble_balances::Call as BalancesCall;
 pub use noble_timestamp::Call as TimestampCall;
 #[cfg(any(feature = "std", test))]
-pub use sp_runtime::BuildStorage;
-pub use sp_runtime::{
+pub use tp_runtime::BuildStorage;
+pub use tp_runtime::{
     Perbill,
     Permill,
 };
@@ -111,7 +111,7 @@ pub type Balance = u128;
 pub type Index = u32;
 
 /// A hash of some data used by the chain.
-pub type Hash = sp_core::H256;
+pub type Hash = tet_core::H256;
 
 /// Digest item type.
 pub type DigestItem = generic::DigestItem<Hash>;
@@ -123,7 +123,7 @@ pub type DigestItem = generic::DigestItem<Hash>;
 pub mod opaque {
     use super::*;
 
-    pub use sp_runtime::OpaqueExtrinsic as UncheckedExtrinsic;
+    pub use tp_runtime::OpaqueExtrinsic as UncheckedExtrinsic;
 
     /// Opaque block header type.
     pub type Header = generic::Header<BlockNumber, BlakeTwo256>;
@@ -359,7 +359,7 @@ pub type Executive = fabric_executive::Executive<
 >;
 
 impl_runtime_apis! {
-    impl sp_api::Core<Block> for Runtime {
+    impl tp_api::Core<Block> for Runtime {
         fn version() -> RuntimeVersion {
             VERSION
         }
@@ -373,13 +373,13 @@ impl_runtime_apis! {
         }
     }
 
-    impl sp_api::Metadata<Block> for Runtime {
+    impl tp_api::Metadata<Block> for Runtime {
         fn metadata() -> OpaqueMetadata {
             Runtime::metadata().into()
         }
     }
 
-    impl sp_block_builder::BlockBuilder<Block> for Runtime {
+    impl tp_block_builder::BlockBuilder<Block> for Runtime {
         fn apply_extrinsic(extrinsic: <Block as BlockT>::Extrinsic) -> ApplyExtrinsicResult {
             Executive::apply_extrinsic(extrinsic)
         }
@@ -388,14 +388,14 @@ impl_runtime_apis! {
             Executive::finalize_block()
         }
 
-        fn inherent_extrinsics(data: sp_inherents::InherentData) -> Vec<<Block as BlockT>::Extrinsic> {
+        fn inherent_extrinsics(data: tp_inherents::InherentData) -> Vec<<Block as BlockT>::Extrinsic> {
             data.create_extrinsics()
         }
 
         fn check_inherents(
             block: Block,
-            data: sp_inherents::InherentData,
-        ) -> sp_inherents::CheckInherentsResult {
+            data: tp_inherents::InherentData,
+        ) -> tp_inherents::CheckInherentsResult {
             data.check_extrinsics(&block)
         }
 
@@ -404,7 +404,7 @@ impl_runtime_apis! {
         }
     }
 
-    impl sp_transaction_pool::runtime_api::TaggedTransactionQueue<Block> for Runtime {
+    impl tp_transaction_pool::runtime_api::TaggedTransactionQueue<Block> for Runtime {
         fn validate_transaction(
             source: TransactionSource,
             tx: <Block as BlockT>::Extrinsic,
@@ -413,13 +413,13 @@ impl_runtime_apis! {
         }
     }
 
-    impl sp_offchain::OffchainWorkerApi<Block> for Runtime {
+    impl tp_offchain::OffchainWorkerApi<Block> for Runtime {
         fn offchain_worker(header: &<Block as BlockT>::Header) {
             Executive::offchain_worker(header)
         }
     }
 
-    impl sp_consensus_aura::AuraApi<Block, AuraId> for Runtime {
+    impl tp_consensus_aura::AuraApi<Block, AuraId> for Runtime {
         fn slot_duration() -> u64 {
             Aura::slot_duration()
         }
@@ -429,7 +429,7 @@ impl_runtime_apis! {
         }
     }
 
-    impl sp_session::SessionKeys<Block> for Runtime {
+    impl tp_session::SessionKeys<Block> for Runtime {
         fn generate_session_keys(seed: Option<Vec<u8>>) -> Vec<u8> {
             opaque::SessionKeys::generate(seed)
         }

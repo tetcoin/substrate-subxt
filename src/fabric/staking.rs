@@ -238,11 +238,11 @@ mod tests {
         ExtrinsicSuccess,
     };
     use assert_matches::assert_matches;
-    use sp_core::{
+    use tet_core::{
         sr25519,
         Pair,
     };
-    use sp_keyring::AccountKeyring;
+    use tp_keyring::AccountKeyring;
 
     /// Helper function to generate a crypto pair from seed
     fn get_from_seed(seed: &str) -> sr25519::Pair {

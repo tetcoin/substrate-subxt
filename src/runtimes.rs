@@ -15,7 +15,7 @@
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use codec::Encode;
-use sp_runtime::{
+use tp_runtime::{
     generic::Header,
     impl_opaque_keys,
     traits::{
@@ -26,7 +26,7 @@ use sp_runtime::{
     MultiSignature,
     OpaqueExtrinsic,
 };
-use sp_std::prelude::*;
+use tetcore_std::prelude::*;
 
 /// BABE marker struct
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
@@ -69,25 +69,25 @@ pub mod app {
     /// Validator app crypto types
     pub mod validator {
         use super::*;
-        app_crypto!(ed25519, sp_core::crypto::KeyTypeId(*b"para"));
+        app_crypto!(ed25519, tet_core::crypto::KeyTypeId(*b"para"));
     }
 }
 
-impl sp_runtime::BoundToRuntimeAppPublic for Babe {
+impl tp_runtime::BoundToRuntimeAppPublic for Babe {
     type Public = app::babe::Public;
 }
 
 /// ImOnline marker struct
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct ImOnline;
-impl sp_runtime::BoundToRuntimeAppPublic for ImOnline {
+impl tp_runtime::BoundToRuntimeAppPublic for ImOnline {
     type Public = app::im_online::Public;
 }
 
 /// GRANDPA marker struct
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Grandpa;
-impl sp_runtime::BoundToRuntimeAppPublic for Grandpa {
+impl tp_runtime::BoundToRuntimeAppPublic for Grandpa {
     type Public = app::grandpa::Public;
 }
 
@@ -95,14 +95,14 @@ impl sp_runtime::BoundToRuntimeAppPublic for Grandpa {
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct Parachains;
 
-impl sp_runtime::BoundToRuntimeAppPublic for Parachains {
+impl tp_runtime::BoundToRuntimeAppPublic for Parachains {
     type Public = app::validator::Public;
 }
 
 /// Authority discovery marker struct
 #[derive(Copy, Clone, Debug, Default, Eq, PartialEq, Ord, PartialOrd, Hash)]
 pub struct AuthorityDiscovery;
-impl sp_runtime::BoundToRuntimeAppPublic for AuthorityDiscovery {
+impl tp_runtime::BoundToRuntimeAppPublic for AuthorityDiscovery {
     type Public = app::authority_discovery::Public;
 }
 
@@ -183,10 +183,11 @@ impl Runtime for DefaultNodeRuntime {
 impl System for DefaultNodeRuntime {
     type Index = u32;
     type BlockNumber = u32;
-    type Hash = sp_core::H256;
+    type Hash = tet_core::H256;
     type Hashing = BlakeTwo256;
     type AccountId = <<MultiSignature as Verify>::Signer as IdentifyAccount>::AccountId;
-    type Address = noble_indices::address::Address<Self::AccountId, u32>;
+    //type Address = noble_indices::address::Address<Self::AccountId, u32>;
+    type Address = tp_runtime::MultiAddress<Self::AccountId, u32>;
     type Header = Header<Self::BlockNumber, BlakeTwo256>;
     type Extrinsic = OpaqueExtrinsic;
     type AccountData = AccountData<<Self as Balances>::Balance>;
@@ -222,7 +223,7 @@ impl Runtime for NodeTemplateRuntime {
 impl System for NodeTemplateRuntime {
     type Index = u32;
     type BlockNumber = u32;
-    type Hash = sp_core::H256;
+    type Hash = tet_core::H256;
     type Hashing = BlakeTwo256;
     type AccountId = <<MultiSignature as Verify>::Signer as IdentifyAccount>::AccountId;
     type Address = Self::AccountId;
@@ -292,7 +293,7 @@ impl Runtime for KusamaRuntime {
 impl System for KusamaRuntime {
     type Index = u32;
     type BlockNumber = u32;
-    type Hash = sp_core::H256;
+    type Hash = tet_core::H256;
     type Hashing = BlakeTwo256;
     type AccountId = <<MultiSignature as Verify>::Signer as IdentifyAccount>::AccountId;
     type Address = Self::AccountId;

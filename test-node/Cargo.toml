@@ -18,25 +18,25 @@ log = "0.4.13"
 structopt = "0.3.21"
 parking_lot = "0.11.1"
 
-sc-cli = { version = "0.8.1", features = ["wasmtime"] }
-sp-core = "2.0.1"
-sc-executor = { version = "0.8.1", features = ["wasmtime"] }
-sc-service = { version = "0.8.1", features = ["wasmtime"] }
-sp-inherents = "2.0.1"
-sc-transaction-pool = "2.0.1"
-sp-transaction-pool = "2.0.1"
-sc-network = "0.8.1"
-sc-consensus-aura = "0.8.1"
-sp-consensus-aura = "0.8.1"
-sp-consensus = "0.8.1"
-sc-consensus = "0.8.1"
-sc-finality-grandpa = "0.8.1"
-sp-finality-grandpa = "2.0.1"
-sc-client-api = "2.0.1"
-sp-runtime = "2.0.1"
-sc-basic-authorship = "0.8.1"
+tc-cli = { version = "0.8.0", features = ["wasmtime"] }
+tet-core = "2.0.1"
+tc-executor = { version = "0.8.0", features = ["wasmtime"] }
+tc-service = { version = "0.8.0", features = ["wasmtime"] }
+tp-inherents = "2.0.1"
+tc-transaction-pool = "2.0.0"
+tp-transaction-pool = "2.0.1"
+tc-network = "0.8.0"
+tc-consensus-aura = "0.8.0"
+tp-consensus-aura = "0.8.1"
+tp-consensus = "0.8.1"
+tc-consensus = "0.8.0"
+tc-finality-grandpa = "0.8.0"
+tp-finality-grandpa = "2.0.1"
+tc-client-api = "2.0.0"
+tp-runtime = "2.0.1"
+tc-basic-authorship = "0.8.0"
 
 test-node-runtime = { path = "runtime" }
 
 [build-dependencies]
-tetcore-build-script-utils = "2.0.1"
+build-script-utils = "2.0.1"

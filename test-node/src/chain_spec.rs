@@ -15,14 +15,14 @@
 // along with tetcore-subxt.  If not, see <http://www.gnu.org/licenses/>.
 
 use sc_service::ChainType;
-use sp_consensus_aura::sr25519::AuthorityId as AuraId;
-use sp_core::{
+use tp_consensus_aura::sr25519::AuthorityId as AuraId;
+use tet_core::{
     sr25519,
     Pair,
     Public,
 };
-use sp_finality_grandpa::AuthorityId as GrandpaId;
-use sp_runtime::traits::{
+use tp_finality_grandpa::AuthorityId as GrandpaId;
+use tp_runtime::traits::{
     IdentifyAccount,
     Verify,
 };

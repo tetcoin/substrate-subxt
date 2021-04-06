@@ -24,8 +24,8 @@ use super::{
 };
 use crate::runtimes::Runtime;
 use codec::Encode;
-use sp_core::Pair;
-use sp_runtime::traits::{
+use tet_core::Pair;
+use tp_runtime::traits::{
     IdentifyAccount,
     SignedExtension,
     Verify,
